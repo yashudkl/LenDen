@@ -1,1 +1,12 @@
 @import "tailwindcss";
+@theme {
+ --color-lenden-primary: #7B9669; 
+  --color-lenden-primary-hover: #688257;
+  --color-lenden-primary-active: #566E46;
+  --color-lenden-bg-page: #f8fafc;
+  --color-lenden-bg-card: #ffffff;
+  --color-lenden-text-dark: #0f172a;
+  --color-lenden-text-muted: #64748b;
+  --color-lenden-border-light: #e2e8f0;
+  --color-lenden-border-focus: #688257;
+}
