@@ -1,7 +1,7 @@
-    
 
 import React, { useState } from 'react';
-
+import TextLogo from '../TextLogo/TextLogo';
+import { NavLink } from 'react-router-dom';
 export default function Login() {
   const [formData, setFormData] = useState({
     email: '',
@@ -31,9 +31,7 @@ export default function Login() {
         {/* Branding & Header */}
         <div className="text-center space-y-2">
           {/* Brand Logo Badge */}
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-lenden-primary text-white font-bold text-xl shadow-md shadow-lenden-primary/20 mb-2">
-            LD
-          </div>
+         <TextLogo/>
           <h1 className="text-2xl font-bold tracking-tight text-lenden-text-dark">
             Sign in to LenDen
           </h1>
@@ -120,12 +118,12 @@ export default function Login() {
         <div className="text-center pt-2 border-t border-lenden-border-light">
           <p className="text-xs sm:text-sm text-lenden-text-muted">
             Don't have an account yet?{' '}
-            <a 
-              href="#signup" 
+            <NavLink
+              to="/signup" 
               className="font-semibold text-lenden-primary hover:text-lenden-primary-hover hover:underline"
             >
               Sign up
-            </a>
+            </NavLink>
           </p>
         </div>
 
