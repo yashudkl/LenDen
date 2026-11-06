@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import TextLogo from "../TextLogo/TextLogo"; // adjust path/export to match your project
+import TextLogo from "../components/TextLogo/TextLogo"; // adjust path/export to match your project
 
 const inputClass =
   "w-full rounded-lg border border-lenden-border-light bg-lenden-bg-page px-4 py-3 text-lenden-text-dark placeholder:text-lenden-text-muted/70 outline-none transition focus:border-lenden-border-focus focus:ring-2 focus:ring-lenden-primary/25";

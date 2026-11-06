@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import TextLogo from '../TextLogo/TextLogo';
+import TextLogo from '../components/TextLogo/TextLogo';
 import { NavLink } from 'react-router-dom';
 export default function Login() {
   const [formData, setFormData] = useState({
