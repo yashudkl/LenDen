@@ -9,7 +9,8 @@ import {
 } from 'react-router-dom'
 
 import AppLayout from './AppLayout.jsx'
-import { Login, Signup } from './components/index.js'
+import { Login, Signup } from './pages/index.js'
+
 // adjust these paths to where you actually put the files:
 import ProtectedRoute from './ProtectedRoute.jsx'
 // import Dashboard from './pages/Dashboard.jsx'
