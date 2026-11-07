@@ -7,10 +7,10 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom'
-
+import{Provider} from 'react-redux'
 import AppLayout from './AppLayout.jsx'
-import { Login, Signup } from './pages/index.js'
-
+import { Login, Signup,Dashboard  } from './pages/index.js'
+import { store } from './store/store.js'
 // adjust these paths to where you actually put the files:
 import ProtectedRoute from './ProtectedRoute.jsx'
 // import Dashboard from './pages/Dashboard.jsx'
@@ -26,7 +26,7 @@ const router = createBrowserRouter(
       {/* Private */}
       <Route element={<ProtectedRoute />}>
         <Route element={<AppLayout />}>
-          {/* <Route path="/" element={<Dashboard />} /> */}
+          <Route path="/" element={<Dashboard />} />
           {/* add /add, /transactions, /profile here as you build them */}
         </Route>
       </Route>
@@ -39,6 +39,10 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+  <Provider store={store}>
+
+    
     <RouterProvider router={router} />
+  </Provider>
   </StrictMode>
 )
