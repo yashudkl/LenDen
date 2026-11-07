@@ -1,27 +1,34 @@
 
 import React, { useState } from 'react';
 import TextLogo from '../components/TextLogo/TextLogo';
-import { NavLink, useNavigation } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import authService from "../../supbase/auth";
-import { login as storeLogin } from '../store/authSlice'
+import { login as storeLogin } from '../feature/auth/authSlice'
 export default function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { register, handleSubmit } = useForm()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm()
   const [error, setError] = useState("")
 
   const login = async (data) => {
     setError("")
     try {
       const { user } = await authService.login(data)
-      if (user) {
-        dispatch(storeLogin(user))
-        navigate('/')
+      if (!user) {
+        setError("Unable to sign in. Please try again.")
+        return
       }
-    } catch (error) {
-      setError(error.message)
+
+      dispatch(storeLogin(user))
+      navigate('/')
+    } catch (authError) {
+      setError(authError.message || "Unable to sign in. Please try again.")
     }
   }
 
@@ -44,6 +51,14 @@ export default function Login() {
 
         {/* Form */}
         <form className="space-y-4" onSubmit={handleSubmit(login)}>
+          {error && (
+            <p
+              role="alert"
+              className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700"
+            >
+              {error}
+            </p>
+          )}
 
           {/* Email Input */}
           <div>
@@ -56,17 +71,21 @@ export default function Login() {
             <input
               type="email"
               id="email"
+              aria-invalid={errors.email ? "true" : "false"}
               {...register("email", {
-                rquired: true,
+                required: "Email address is required",
                 validate: {
                   matchPattern: (value) => {
-                    /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value) ||
+                    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value) ||
                       "Email address must be a valid address"
                   }
                 }
               })}
               className="w-full px-4 py-2.5 rounded-lg border border-lenden-border-light text-lenden-text-dark text-sm placeholder-lenden-text-muted focus:outline-none focus:ring-2 focus:ring-lenden-border-focus focus:border-lenden-border-focus transition-all duration-150"
             />
+            {errors.email && (
+              <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>
+            )}
           </div>
 
           {/* Password Input */}
@@ -80,11 +99,15 @@ export default function Login() {
             <input
               type="password"
               id="password"
+              aria-invalid={errors.password ? "true" : "false"}
               {...register("password",{
-                required: true,
+                required: "Password is required",
               })}
               className="w-full px-4 py-2.5 rounded-lg border border-lenden-border-light text-lenden-text-dark text-sm placeholder-lenden-text-muted focus:outline-none focus:ring-2 focus:ring-lenden-border-focus focus:border-lenden-border-focus transition-all duration-150"
             />
+            {errors.password && (
+              <p className="mt-1 text-xs text-red-600">{errors.password.message}</p>
+            )}
           </div>
 
           {/* Remember Me & Forgot Password */}
@@ -93,8 +116,8 @@ export default function Login() {
               <input
                 type="checkbox"
                 name="rememberMe"
-                checked={formData.rememberMe}
-                onChange={handleChange}
+              
+                
                 className="w-4 h-4 rounded text-lenden-primary border-lenden-border-light focus:ring-lenden-primary focus:ring-offset-0 transition"
               />
               <span className="text-lenden-text-muted text-xs sm:text-sm">
@@ -112,9 +135,10 @@ export default function Login() {
           {/* Submit Button */}
           <button
             type="submit"
+            disabled={isSubmitting}
             className="w-full py-2.5 px-4 bg-lenden-primary hover:bg-lenden-primary-hover active:bg-lenden-primary-active text-white font-medium text-sm rounded-lg shadow-sm hover:shadow transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-lenden-primary focus:ring-offset-2"
           >
-            Sign in
+            {isSubmitting ? 'Signing in...' : 'Sign in'}
           </button>
         </form>
 
