@@ -8,7 +8,7 @@
 ![Redux](https://img.shields.io/badge/Redux_Toolkit-764ABC?style=for-the-badge&logo=redux&logoColor=white)
 ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Appwrite](https://img.shields.io/badge/Appwrite-Planned-F02E65?style=for-the-badge&logo=appwrite&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-Planned-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
 
 <br />
 
@@ -20,7 +20,7 @@
 
 LenDen is a personal lending and borrowing tracker built with React. It helps users keep track of their transactions, manage debts, and understand how much money they owe or are owed by others.
 
-The project is currently focused on frontend development, with plans to integrate Appwrite as the backend in the future.
+The project is currently focused on frontend development, with plans to integrate Supabase as the backend in the future.
 
 ## Features
 
@@ -33,7 +33,7 @@ The project is currently focused on frontend development, with plans to integrat
 - Manage application state using Redux Toolkit.
 
 ### Planned Features
-- User authentication with Appwrite.
+- User authentication with Supabase.
 - Cloud database integration.
 - Persistent transaction history.
 - Add, edit, and delete transactions.
@@ -50,7 +50,7 @@ The project is currently focused on frontend development, with plans to integrat
 | Redux Toolkit | Global state management |
 | React Router DOM | Client-side routing |
 | Tailwind CSS | Styling |
-| Appwrite (Planned) | Backend, authentication and database |
+| Supabase (Planned) | Backend, authentication and database |
 
 ## Getting Started
 
