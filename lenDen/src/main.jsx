@@ -9,8 +9,7 @@ import {
 } from 'react-router-dom'
 import { Provider, useDispatch } from 'react-redux'
 import AppLayout from './AppLayout.jsx'
-import { Login, Signup, Dashboard } from './pages/index.js'
-import CheckEmail from './pages/CheckEmail.jsx'
+import { Login, Signup, Dashboard ,CheckEmail} from './pages/index.js'
 import { store } from './store/store.js'
 import ProtectedRoute from './ProtectedRoute.jsx'
 import { supabase } from '../supbase/client'
@@ -22,7 +21,7 @@ const router = createBrowserRouter(
       {/* Public */}
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/check-email" element={<CheckEmail />} />
+      <Route path="/checkemail" element={<CheckEmail />} />
 
       {/* Private */}
       <Route element={<ProtectedRoute />}>
