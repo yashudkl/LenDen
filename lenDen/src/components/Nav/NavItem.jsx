@@ -16,8 +16,8 @@ export default function NavItem({ to, icon: Icon, label, end = false, compact = 
             ? compact
               ? 'text-lenden-primary-active'
               : 'bg-lenden-primary/10 text-lenden-primary-active font-semibold'
-            : 'text-lenden-text-muted hover:text-lenden-text-dark ' +
-              (compact ? '' : 'hover:bg-lenden-bg-page'),
+            : 'text-lenden-text-dark hover:text-lenden-text-dark ' +
+              (compact ? '' : 'hover:bg-lenden-bg-page hover:text-lenden-text-muted'),
         ].join(' ')
       }
     >

@@ -1,9 +1,10 @@
+import  {Nav} from "../components";
 function Dashboard(props) {
     
 
     return (
         <>
-        Dashboard page
+        <Nav/>
         </>
     );
 }

@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom"; 
-import {Sidebar} from "./components/index"
+import {Nav} from "./components/index"
 
 function Layout(){
 
     return(
         <>
         
-       <Sidebar/> 
+       <Nav/> 
 <Outlet/>
         
         </>
