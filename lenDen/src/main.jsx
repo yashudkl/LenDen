@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import { StrictMode, useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import {
@@ -7,14 +7,14 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom'
-import{Provider} from 'react-redux'
+import { Provider, useDispatch } from 'react-redux'
 import AppLayout from './AppLayout.jsx'
-import { Login, Signup,Dashboard  } from './pages/index.js'
+import { Login, Signup, Dashboard } from './pages/index.js'
+import CheckEmail from './pages/CheckEmail.jsx'
 import { store } from './store/store.js'
-// adjust these paths to where you actually put the files:
 import ProtectedRoute from './ProtectedRoute.jsx'
-// import Dashboard from './pages/Dashboard.jsx'
-// import NotFound from './pages/NotFound.jsx'
+import { supabase } from '../supbase/client'
+import { login, logout } from './feature/auth/authSlice'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,27 +22,57 @@ const router = createBrowserRouter(
       {/* Public */}
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/check-email" element={<CheckEmail />} />
 
       {/* Private */}
       <Route element={<ProtectedRoute />}>
         <Route element={<AppLayout />}>
           <Route path="/" element={<Dashboard />} />
-          {/* add /add, /transactions, /profile here as you build them */}
         </Route>
       </Route>
-
-      {/* Fallback */}
-      {/* <Route path="*" element={<NotFound />} /> */}
     </>
   )
 )
 
+// Restores the Supabase session before rendering any route
+function AuthBootstrap({ children }) {
+  const dispatch = useDispatch()
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    let active = true
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!active) return
+      if (session) dispatch(login(session.user))
+      else dispatch(logout())
+      setReady(true)
+    })
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        if (session) dispatch(login(session.user))
+        else dispatch(logout())
+      }
+    )
+
+    return () => {
+      active = false
+      subscription.unsubscribe()
+    }
+  }, [dispatch])
+
+  if (!ready) return null // swap for a spinner if you like
+
+  return children
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-  <Provider store={store}>
-
-    
-    <RouterProvider router={router} />
-  </Provider>
+    <Provider store={store}>
+      <AuthBootstrap>
+        <RouterProvider router={router} />
+      </AuthBootstrap>
+    </Provider>
   </StrictMode>
 )
