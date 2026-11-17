@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import TextLogo from "../components/TextLogo/TextLogo"; // adjust path/export to match your project
 import authService from "../../supbase/auth";
 import { login as storeLogin } from "../feature/auth/authSlice";
- 
+ import CheckEmail from './CheckEmail'
 const inputClass =
   "w-full rounded-lg border border-lenden-border-light bg-lenden-bg-page px-4 py-3 text-lenden-text-dark placeholder:text-lenden-text-muted/70 outline-none transition focus:border-lenden-border-focus focus:ring-2 focus:ring-lenden-primary/25";
  
@@ -44,7 +44,7 @@ export default function Signup() {
         // back without an active session. In that case, show a "check your
         // email" message here instead of logging in and redirecting.
         dispatch(storeLogin(user));
-        navigate("/");
+        navigate('/checkemail')
       }
     } catch (err) {
       setError(err?.message || "Something went wrong. Please try again.");
@@ -213,7 +213,7 @@ export default function Signup() {
           {error && (
             <p
               role="alert"
-              className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600"
+              className="rounded-lg bg-lenden-text-red-50 px-3 py-2 text-sm text-lenden-text-red-600"
             >
               {error}
             </p>
