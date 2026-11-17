@@ -50,7 +50,7 @@ export default function Nav(){
           </Link>
 
           <Link
-            to="/add"
+            to="/addtransactions"
             className="flex items-center gap-2 rounded-lg bg-lenden-primary px-3 py-2 text-sm font-medium text-white shadow-sm transition-all hover:bg-lenden-primary-hover hover:shadow active:bg-lenden-primary-active focus:outline-none focus:ring-2 focus:ring-lenden-primary focus:ring-offset-2"
           >
             <CirclePlus size={18} strokeWidth={1.5} />

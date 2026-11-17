@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom'
 import { Provider, useDispatch } from 'react-redux'
 import AppLayout from './AppLayout.jsx'
-import { Login, Signup, Dashboard ,CheckEmail} from './pages/index.js'
+import { Login, Signup, Dashboard ,CheckEmail , AddTransactions} from './pages/index.js'
 import { store } from './store/store.js'
 import ProtectedRoute from './ProtectedRoute.jsx'
 import { supabase } from '../supbase/client'
@@ -27,6 +27,7 @@ const router = createBrowserRouter(
       <Route element={<ProtectedRoute />}>
         <Route element={<AppLayout />}>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/addtransactions" element = {<AddTransactions/>}/>
         </Route>
       </Route>
     </>
